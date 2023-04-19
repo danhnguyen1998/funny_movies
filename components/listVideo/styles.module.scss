@@ -25,13 +25,24 @@
 .video__wrapper {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.video__player {
+    display: flex;
+    width: 50%;
 }
 
 .video__metadata {
     display: flex;
+    width: 50%;
+    margin-left: 1rem;
     flex-direction: column;
     p {
         margin: 0.25rem;
     }
+}
+
+.video__title {
+    color: red;
 }
