@@ -3,6 +3,8 @@ import { Input, Button, notification } from 'antd';
 import styles from './styles.module.scss';
 import { LOCAL_STORAGE, STATUS_CODE } from "../../utils/common";
 import { apiCreateVideo } from "../../services/video";
+import { useVideoInfo } from "../../hooks/useVideoInfo";
+import { getEmbedId } from "../../helpers/common";
 
 function ShareVideo() {
     const Context = React.createContext({
@@ -35,12 +37,18 @@ function ShareVideo() {
 
     const onSubmit = async () => {
         const username = localStorage.getItem(LOCAL_STORAGE.USERNAME)
-        const result = await apiCreateVideo({
-            url: state.url,
-            title: 'Test',
-            shareby: username,
-        })
-        if (result.status_code === STATUS_CODE.OK) openNotification('topRight')
+        const embedId = getEmbedId(state.url)
+        const videoInfo = await useVideoInfo(embedId)
+        if(videoInfo.data.items.length > 0) {
+            const content = videoInfo.data.items[0]
+            const result = await apiCreateVideo({
+                url: state.url,
+                title: content.snippet?.title,
+                shareby: username,
+                description: content.snippet?.description.substring(0, 200).concat("...")
+            })
+            if (result.status_code === STATUS_CODE.OK) openNotification('topRight')
+        }
     }
 
     return (

@@ -1,12 +1,13 @@
 .video__responsive {
     overflow: hidden;
-    padding-bottom: 56.25%;
+    padding-bottom: 80%;
     position: relative;
     width: 100%;
 
     iframe {
         left: 0;
         top: 0;
+        width: 100%;
         position: absolute;
     }
 }
