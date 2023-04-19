@@ -1,0 +1,25 @@
+.header__wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex_row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.header__title {
+    font-size: 24px;
+    margin-left: 0.5rem;
+}
+
+.input__common {
+    margin-right: 0.5rem;
+}
+
+.mr_05 {
+    margin-right: 0.5rem;
+}

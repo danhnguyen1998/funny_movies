@@ -20,3 +20,8 @@ export const HTTP_METHOD = {
   PUT: 'put',
   DELETE: 'delete',
 };
+
+export const LOCAL_STORAGE = {
+  TOKEN: 'token',
+  USERNAME: 'username',
+};

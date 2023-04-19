@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import Header from "../../components/header";
 
 function Index() {
   const router = useRouter();
@@ -10,7 +11,7 @@ function Index() {
 
   return (
     <>
-      <div>Login</div>
+      <Header />
     </>
   );
 }
