@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { HTTP_METHOD, STATUS_CODE } from '../utils/common';
+import { HTTP_METHOD, LOCAL_STORAGE, STATUS_CODE } from '../utils/common';
 
 const axiosInstance = axios.create({
   timeout: 6000,
@@ -13,6 +13,13 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   config => {
+    const token = localStorage.getItem(LOCAL_STORAGE.TOKEN)
+    if (token) {
+      config.headers = {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      };
+    }
     return config;
   },
   error => {
@@ -33,8 +40,8 @@ axiosInstance.interceptors.response.use(
     // if needs to navigate to login page when request exception
     if (error.response?.status === STATUS_CODE.UNAUTHORIZED) {
       localStorage.clear();
-      if (['/login'].indexOf(window.location.pathname) < 0) {
-        window.location.href = '/login';
+      if (['/home'].indexOf(window.location.pathname) < 0) {
+        window.location.href = '/home';
       }
     }
 

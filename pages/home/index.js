@@ -1,16 +1,34 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import Header from "../../components/header";
+import ListVideo from "../../components/listVideo";
+import ShareVideo from "../../components/shareVideo";
+import { useAuth } from "../../hooks/useAuth";
 
 function Index() {
-  const router = useRouter();
+  const router = useRouter()
+  const { isAuth } = useAuth();
 
-  useEffect(() => {
-    
-  }, [router]);
+  const renderContent = () => {
+    const content = router.query.content
+    if (isAuth) {
+      switch (content) {
+        case 'listing':
+          return <ListVideo />
+        case 'sharing':
+          return <ShareVideo />
+        default:
+          return <ListVideo />
+      }
+    } else {
+      return;
+    }
+  }
 
   return (
     <>
-      <div>Home</div>
+      <Header />
+      {renderContent()}
     </>
   );
 }
