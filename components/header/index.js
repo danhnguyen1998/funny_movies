@@ -38,15 +38,11 @@ function Header() {
     }
 
     const shareMovies = () => {
-        router.replace({
-            query: { ...router.query, content: 'sharing' },
-        });
+        router.push('/share')
     }
 
     const onBackHome = () => {
-        router.replace({
-            query: { ...router.query, content: 'listing' },
-        });
+        router.push('/home')
     }
 
     return (
