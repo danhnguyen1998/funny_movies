@@ -3,7 +3,7 @@ import { Input, Button } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone, HomeOutlined } from "@ant-design/icons";
 import styles from './styles.module.scss';
 import { apiRegister } from "../../services/authentication";
-import { LOCAL_STORAGE } from "../../utils/common";
+import { LOCAL_STORAGE, STATUS_CODE } from "../../utils/common";
 import { useRouter } from "next/router";
 import { useAuth } from "../../hooks/useAuth";
 
@@ -27,9 +27,11 @@ function Header() {
             username,
             password
         })
-        localStorage.setItem(LOCAL_STORAGE.TOKEN, result.token)
-        localStorage.setItem(LOCAL_STORAGE.USERNAME, result.username)
-        location.reload();
+        if (result.status_code === STATUS_CODE.OK) {
+            localStorage.setItem(LOCAL_STORAGE.TOKEN, result.token)
+            localStorage.setItem(LOCAL_STORAGE.USERNAME, result.username)
+            location.reload();
+        }
     }
 
     const onLogout = () => {
