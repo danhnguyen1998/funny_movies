@@ -15,10 +15,10 @@ function ShareVideo() {
     });
     const [api, contextHolder] = notification.useNotification();
 
-    const openNotification = (placement) => {
+    const openNotification = (placement, message) => {
         api.info({
             message: `Notification`,
-            description: <Context.Consumer>{() => `Share video successfully!`}</Context.Consumer>,
+            description: <Context.Consumer>{() => `${message}`}</Context.Consumer>,
             placement,
         });
     };
@@ -39,7 +39,7 @@ function ShareVideo() {
         const username = localStorage.getItem(LOCAL_STORAGE.USERNAME)
         const embedId = getEmbedId(state.url)
         const videoInfo = await useVideoInfo(embedId)
-        if(videoInfo.data.items.length > 0) {
+        if (videoInfo.data.items.length > 0) {
             const content = videoInfo.data.items[0]
             const result = await apiCreateVideo({
                 url: state.url,
@@ -47,7 +47,13 @@ function ShareVideo() {
                 shareby: username,
                 description: content.snippet?.description.substring(0, 200).concat("...")
             })
-            if (result.status_code === STATUS_CODE.OK) openNotification('topRight')
+            if (result.status_code === STATUS_CODE.OK) {
+                openNotification('topRight', 'Successfully sharing')
+            } else {
+                openNotification('topRight', 'Something wrong. Please check your url!')
+            }
+        } else {
+            openNotification('topRight', 'Something wrong. Please check your url!')
         }
     }
 
