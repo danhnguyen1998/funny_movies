@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../../components/header";
-import ListVideo from "../../components/listVideo";
+import ShareVideo from "../../components/shareVideo";
 import { useAuth } from "../../hooks/useAuth";
 
 function Index() {
@@ -8,7 +8,7 @@ function Index() {
 
   const renderContent = () => {
     if (isAuth)
-      return <ListVideo />
+      return <ShareVideo />
   }
 
   return (
