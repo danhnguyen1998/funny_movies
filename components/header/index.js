@@ -79,7 +79,11 @@ function Header() {
                             name="password"
                             iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                         />
-                        <Button type="primary" onClick={onAuth}>Login/Register</Button>
+                        <Button
+                            type="primary"
+                            disabled={!state.username || !state.password}
+                            onClick={onAuth}
+                        >Login/Register</Button>
                     </>
                 }
             </div>
