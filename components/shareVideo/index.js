@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import { Input, Button, notification } from 'antd';
 import styles from './styles.module.scss';
 import { LOCAL_STORAGE, STATUS_CODE } from "../../utils/common";
@@ -61,8 +61,10 @@ function ShareVideo() {
                         name="url"
                         placeholder="Youtube URL"
                         className={styles.input__common}
+                        data-test="input__url-sharing"
+                        data-testid="input__url-sharing"
                     />
-                    <Button type="primary" onClick={onSubmit}>Share</Button>
+                    <Button data-testid="btn-sharing" data-test="btn-sharing" type="primary" onClick={onSubmit}>Share</Button>
                 </div >
             </div>
         </ >
