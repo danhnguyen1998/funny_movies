@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 import { HTTP_METHOD, LOCAL_STORAGE, STATUS_CODE } from '../utils/common';
 
 const axiosInstance = axios.create({

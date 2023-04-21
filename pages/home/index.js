@@ -3,7 +3,7 @@ import Header from "../../components/header";
 import ListVideo from "../../components/listVideo";
 import { useAuth } from "../../hooks/useAuth";
 
-function Index() {
+function Home() {
   const { isAuth } = useAuth();
 
   const renderContent = () => {
@@ -19,4 +19,4 @@ function Index() {
   );
 }
 
-export default Index;
+export default Home;
