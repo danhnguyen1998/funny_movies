@@ -4,12 +4,9 @@ import styles from './styles.module.scss';
 import { LOCAL_STORAGE, STATUS_CODE } from "../../utils/common";
 import { apiCreateVideo } from "../../services/video";
 import { useVideoInfo } from "../../hooks/useVideoInfo";
-import { getEmbedId } from "../../helpers/common";
+import { Context, getEmbedId } from "../../helpers/common";
 
 function ShareVideo() {
-    const Context = React.createContext({
-        name: 'Default',
-    });
     const [state, setState] = useState({
         url: '',
     });
@@ -22,13 +19,6 @@ function ShareVideo() {
             placement,
         });
     };
-
-    const contextValue = useMemo(
-        () => ({
-            name: 'Funny Movies',
-        }),
-        [],
-    );
 
     const onChange = (e) => {
         const { name, value } = e.target;
@@ -59,7 +49,7 @@ function ShareVideo() {
 
     return (
         <>
-            <Context.Provider value={contextValue}>
+            <Context.Provider value="Funny Movies">
                 {contextHolder}
             </Context.Provider>
             <div className={styles.flex}>
