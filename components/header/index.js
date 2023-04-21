@@ -38,12 +38,12 @@ function Header() {
             username,
             password
         })
-        if (result.status_code === STATUS_CODE.OK) {
-            localStorage.setItem(LOCAL_STORAGE.TOKEN, result.token)
-            localStorage.setItem(LOCAL_STORAGE.USERNAME, result.username)
+        if (result?.status_code === STATUS_CODE.OK) {
+            localStorage.setItem(LOCAL_STORAGE.TOKEN, result?.token)
+            localStorage.setItem(LOCAL_STORAGE.USERNAME, result?.username)
             location.reload();
         } else {
-            openNotification('topRight', result.message)
+            openNotification('topRight', result?.message)
         }
     }
 
@@ -66,7 +66,7 @@ function Header() {
                 {contextHolder}
             </Context.Provider>
             <div className={styles.header__wrapper}>
-                <div className={styles.header__logo} onClick={onBackHome}>
+                <div className={styles.header__logo} data-test="header__logo" data-testid="header__logo" onClick={onBackHome}>
                     <HomeOutlined />
                     <p className={styles.header__title}>Funny Movies</p>
                 </div>
@@ -74,13 +74,14 @@ function Header() {
                     {isAuth ?
                         <>
                             <p className={styles.mr_05} data-test="para__welcome">Welcome {username}</p>
-                            <Button className={styles.mr_05} type="primary" onClick={shareMovies}>Share a movie</Button>
-                            <Button className={styles.mr_05} type="primary" onClick={onLogout}>Logout</Button>
+                            <Button className={styles.mr_05} type="primary" onClick={shareMovies} data-test="header__share-button">Share a movie</Button>
+                            <Button className={styles.mr_05} type="primary" onClick={onLogout} data-test="header__logout-button" data-testid="header__logout-button">Logout</Button>
                         </>
                         :
                         <>
                             <Input
                                 data-test="input__username"
+                                data-testid="input__username"
                                 value={state.username}
                                 onChange={onChange}
                                 name="username"
@@ -89,6 +90,7 @@ function Header() {
                             />
                             <Input.Password
                                 data-test="input__password"
+                                data-testid="input__password"
                                 value={state.password}
                                 onChange={onChange}
                                 className={styles.input__common}
@@ -98,6 +100,7 @@ function Header() {
                             />
                             <Button
                                 data-test="button__login"
+                                data-testid="button__login"
                                 type="primary"
                                 disabled={!state.username || !state.password}
                                 onClick={onAuth}
